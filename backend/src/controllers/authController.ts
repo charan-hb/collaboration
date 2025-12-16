@@ -10,10 +10,12 @@ const toSafeUser = (user: { id: string; email: string; name: string; createdAt?:
 });
 
 const setAuthCookie = (res: Response, token: string): void => {
+  // Use secure cookies in production (HTTPS), allow insecure in local dev
+  const isProduction = process.env.CLIENT_ORIGIN?.startsWith("https://") ?? false;
   res.cookie("token", token, {
     httpOnly: true,
-    sameSite: "lax",
-    secure: false,
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction,
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 };
