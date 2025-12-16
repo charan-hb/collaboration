@@ -6,7 +6,7 @@
     "dev": "nodemon --watch src --ext ts --exec ts-node --files src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "postinstall": "prisma generate --schema=prisma/schema.prisma",
+    "postinstall": "npx prisma generate --schema=prisma/schema.prisma",
     "lint": "tsc --noEmit",
     "test": "vitest run"
   },
